@@ -121,7 +121,8 @@ namespace
                 int offset = i-1+t->header_size;
                 vendor_values["0413"] = {offset, DVEntry(offset, DifVifKey("0413"), MeasurementType::Instantaneous, 0x13, {}, {}, 0, 0, 0, total) };
                 double total_water_consumption_m3 {};
-                extractDVdouble(&vendor_values, "0413", &offset, &total_water_consumption_m3);
+                DVEntryMap dv_map(vendor_values);
+                extractDVdouble(&dv_map, "0413", &offset, &total_water_consumption_m3);
                 total = "*** 10-"+total+" total consumption (%f m3)";
                 t->addSpecialExplanation(offset, 4, KindOfData::CONTENT, Understanding::FULL, total.c_str(), total_water_consumption_m3);
 
